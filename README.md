@@ -56,7 +56,10 @@ npm install
 ```bash
 cp .env.example .env
 ```
-*注：如果你想配合自己的数据使用 AI 翻译功能，请在 `.env` 中填入你的 `OPENAI_API_KEY` 和 `OPENAI_BASE_URL`。*
+
+在 `.env` 中配置：
+- `OPENAI_API_KEY` 和 `OPENAI_BASE_URL` - AI 翻译功能所需
+- `VITE_AUTH_PASSWORD` - **访问密码**（用于保护你的信件档案）
 
 ### 3. 运行演示
 如果你没有自己的数据（即 `../PenPals` 目录为空），系统会自动为你生成 **Mock Data**（模拟数据）。
