@@ -4,6 +4,9 @@ description: 处理新信件并部署到服务器（新收到的信 + 你的回�
 
 # 新信件处理与部署工作流
 
+## 凭据位置
+服务器凭据存储在 `.agent/secrets.env`（已被 gitignore 忽略）。
+
 ## 触发条件
 用户提供了新信件内容（收到的信或发出的回信），需要归档、翻译并同步到服务器。
 
@@ -51,13 +54,13 @@ cd /Volumes/杂项/slowly/webui && npm run build
 ```
 
 ### 6. 同步到服务器
+读取 `.agent/secrets.env` 获取凭据，然后执行：
 ```bash
-rsync -avz /Volumes/杂项/slowly/webui/dist/ root@u.0x0.cat:/var/www/slowly/
+rsync -avz /Volumes/杂项/slowly/webui/dist/ <SSH_HOST>:<DEPLOY_PATH>
 ```
-密码: `<SSH_PASSWORD>`
 
 ### 7. 验证部署
-打开 https://b.0x0.cat 确认新信件已显示
+打开 PUBLIC_URL 确认新信件已显示
 
 ---
 
@@ -69,13 +72,5 @@ cd /Volumes/杂项/slowly/webui && npx tsx scripts/parse_letters.ts
 ```
 然后只同步 letters.json：
 ```bash
-rsync -avz /Volumes/杂项/slowly/webui/public/data/letters.json root@u.0x0.cat:/var/www/slowly/data/
+rsync -avz /Volumes/杂项/slowly/webui/public/data/letters.json <SSH_HOST>:<DEPLOY_PATH>/data/
 ```
-
----
-
-## 服务器信息
-- **访问地址**: https://b.0x0.cat
-- **服务器**: root@u.0x0.cat
-- **密码**: <SSH_PASSWORD>
-- **部署目录**: /var/www/slowly/

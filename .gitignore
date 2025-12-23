@@ -2,6 +2,7 @@
 PenPals/
 webui/scripts/translation_cache.json
 .agent/rules/Domino_Profile_Master.md
+.agent/secrets.env
 .agent/brain/
 
 # System Files
