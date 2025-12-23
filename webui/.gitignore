@@ -22,3 +22,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment Variables
+.env
+.env.*
+!.env.example
+
+# Sensitive Data & Assets
+public/data/*.json
+scripts/translation_cache.json
+public/images/letters/*
+!public/images/letters/.gitkeep

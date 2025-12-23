@@ -16,14 +16,23 @@ interface Letter {
 }
 
 // --- Configuration ---
+import dotenv from 'dotenv';
+dotenv.config();
+
 const PENPALS_DIR = path.resolve(process.cwd(), '../PenPals');
 const OUTPUT_FILE = path.resolve(process.cwd(), 'public/data/letters.json');
 const CACHE_FILE = path.resolve(process.cwd(), 'scripts/translation_cache.json');
 const PUBLIC_IMG_BASE = path.resolve(process.cwd(), 'public/images/letters');
 
 // User provided:
-const OPENAI_BASE_URL = "https://ai.hybgzs.com/v1";
-const OPENAI_API_KEY = "sk-xi8loeeIC7WyTfI_PW6n2WLEARxPALvfTlbiQNujcli3NyaHEX0u9wKHs2w";
+const OPENAI_BASE_URL = process.env.OPENAI_BASE_URL || "https://api.hybgzs.com/v1";
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+
+if (!OPENAI_API_KEY) {
+    console.warn("⚠️  WARNING: OPENAI_API_KEY not found in .env file.");
+    console.warn("    Translation features will be disabled or return empty strings.");
+}
+
 // Using Qwen/Qwen2.5-72B-Instruct as selected
 const MODEL_NAME = "Qwen/Qwen2.5-72B-Instruct";
 
